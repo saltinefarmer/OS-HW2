@@ -13,25 +13,34 @@ int main(int argc, char *argv[])
 	Employee *e_list = malloc(MAX_EMPLOYEES * sizeof(Employee));
 	
 	//srand(time(NULL));	
+	if(e_list != NULL){
+		for (int i = 0; i < MAX_EMPLOYEES; i++){ // fill list
+			Employee e;
 
-	for (int i = 0; i < MAX_EMPLOYEES; i++){ // fill list
-		Employee e;
+			// user input
+			printf("Name: ");
+			scanf("%s", e.name);
 
-		// user input
-		printf("Name: ");
-		scanf("%s", e.name);
-		printf("Salary: ");
-		scanf("%d", &e.salary);
-		
-		//e.salary = rand() % 300;
-		//strcpy(e.name, "a");
+			if(e.name[24] != '\0'){
+				printf("Error: names have a max length of 25\n");
+				return 0;
+			}
 
-		e_list[i] = e;
+			printf("Salary: ");
+			scanf("%d", &e.salary);
+			
+			//e.salary = rand() % 300;
+			//strcpy(e.name, "a");
+			
+
+			e_list[i] = e;
+		}
+		//printList(e_list, MAX_EMPLOYEES);
+
+		heapSort(e_list, MAX_EMPLOYEES);
+		printList(e_list, MAX_EMPLOYEES);
 	}
-	//printList(e_list, MAX_EMPLOYEES);
-
-	heapSort(e_list, MAX_EMPLOYEES);
-	printList(e_list, MAX_EMPLOYEES);
-
+	free(e_list);
+	e_list = NULL;
 	return 0;
 }
